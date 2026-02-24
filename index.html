@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendario de tareas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: rgb(179, 218, 179);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 30px;
+    }
+
+    .app {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 350px;
+      margin-top: 180px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    input, button {
+      padding: 10px;
+      margin-top: 8px;
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 15px;
+    }
+
+    li {
+      background: #eef2f7;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .delete {
+      background: #e74c3c;
+      border: none;
+      color: white;
+      padding: 5px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: auto;
+    }
+
+    .delete:hover {
+      background: #c0392b;
+    }
+  </style>
+</head>
+<body>
+
+<div class="app">
+  <h2>Calendario de tareas</h2>
+
+  <input type="date" id="fecha">
+  <input type="text" id="tarea" placeholder="Escribe una tarea...">
+  <button onclick="agregarTarea()">Agregar tarea</button>
+
+  <ul id="lista"></ul>
+</div>
+
+<script>
+  function agregarTarea() {
+    const fecha = document.getElementById("fecha").value;
+    const tareaTexto = document.getElementById("tarea").value;
+
+    if (!fecha || !tareaTexto) {
+      alert("Completa la fecha y la tarea");
+      return;
+    }
+
+    const li = document.createElement("li");
+    li.textContent = fecha + " - " + tareaTexto;
+
+    const btnEliminar = document.createElement("button");
+    btnEliminar.textContent = "X";
+    btnEliminar.className = "delete";
+
+    btnEliminar.onclick = function() {
+      li.remove();
+    };
+
+    li.appendChild(btnEliminar);
+    document.getElementById("lista").appendChild(li);
+
+    document.getElementById("tarea").value = "";
+  }
+</script>
+
+</body>
+</html>
